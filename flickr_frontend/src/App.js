@@ -18,12 +18,13 @@ const App = () => {
     
     <div className="js-animsition animsition" data-animsition-in-className="fade-in" data-animsition-out-className="fade-out">
 
-    <header className="templateux-navbar" data-aos="fade-down">
+    <header style={{background:'white', position: 'fixed', top: 0, width: '100%'}} 
+    className="templateux-navbar" data-aos="fade-down">
       <div className="container-fluid">
         <div className="row">
           <div className="col-sm-3 col-3"><div className="site-logo">
           <a href="/" className="animsition-link">
-            Flickr API
+            <b>Flickr</b> Public Photos
           </a></div></div>
           <div className="col-sm-9 col-9 text-right">
 
@@ -38,10 +39,11 @@ const App = () => {
                 <li className="">
                   <form>
                     <div className="row">
-                      <button className="mx-2 col-sm-2 button button--red">
+                      <button className="mx-2 col-sm-2 btn btn-danger">
                         <i className="fas fa-search"></i>
                       </button>
-                      <input type="text" className="col-sm-8 form-control" placeholder="Search for tags ..."/>
+                      <input type="text" className="col-sm-8 form-control" 
+                      placeholder="Search for tags ..."/>
                     </div>
                   </form>
                 </li>
@@ -56,7 +58,7 @@ const App = () => {
     </section>
     
     <section className="templateux-portfolio-overlap" id="next">
-      <div className="container-fluid">
+      <div className="container">
     
         <div className="row">
 
@@ -64,14 +66,31 @@ const App = () => {
             <div key={j} className="col-lg-4 col-md-6" data-aos="fade-up">
             <a href="/" className="project animsition-link">
               <figure className="figure">
-                <img style={{width: '800px', height: '400px', objectFit: 'cover'}}
+                <img style={{width: '600px', height: '300px', objectFit: 'cover'}}
                 src={i.media.m} alt="Free Template" className="figure-img img-fluid rounded img-fluid"/>  
               </figure>
               <div className="project-hover">
                 <div className="project-hover-inner">
                   <h2>{i.title}</h2>
-                  <span>View Case Study</span>
+                  <span>
+                    <i className="mr-1 fas fa-user"></i>
+                    {i.author.split('"')[1]}
+                  </span>
+                  <br></br>
+                  <span>
+                    <i className="mr-1 fas fa-tag"></i>
+                    {i.tags.split(' ').slice(0, 3).map((k, l) => (
+                      <span key={l} className="mr-1 badge badge-secondary">
+                        {k}
+                      </span>
+                    ))}
+                  </span>
                 </div>
+                <span style={{position:'relative', top:250, left:290}}>
+                  <button className="btn btn-light">
+                    <i style={{color:'red'}} className="fas fa-heart"></i>
+                  </button>
+                </span>
               </div>
             </a>
           </div>
