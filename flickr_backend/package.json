@@ -1,0 +1,21 @@
+{
+  "name": "flickr_backend",
+  "version": "0.0.1",
+  "description": "flickr backend",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "flickr",
+    "nodejs",
+    "expressjs"
+  ],
+  "author": "lintangwisesa",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "flickr-sdk": "^3.9.0"
+  }
+}
