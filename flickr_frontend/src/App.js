@@ -1,34 +1,47 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import './App.css';
 
 const App = () => {
+
+  const [photos, setPhotos] = useState([])
+
+  useEffect(() => {
+    fetch('http://localhost:1234/photos')
+      .then((res) => res.json())
+      .then((res) => {
+        console.log(res)
+        setPhotos(res.items)
+      })
+  }, [])
+
   return (
     
-    <div class="js-animsition animsition" data-animsition-in-class="fade-in" data-animsition-out-class="fade-out">
+    <div className="js-animsition animsition" data-animsition-in-className="fade-in" data-animsition-out-className="fade-out">
 
-    <header class="templateux-navbar" data-aos="fade-down">
-      <div class="container-fluid">
-        <div class="row">
-          <div class="col-sm-3 col-3"><div class="site-logo"><a href="index.html" class="animsition-link">
+    <header className="templateux-navbar" data-aos="fade-down">
+      <div className="container-fluid">
+        <div className="row">
+          <div className="col-sm-3 col-3"><div className="site-logo">
+          <a href="/" className="animsition-link">
             Flickr API
           </a></div></div>
-          <div class="col-sm-9 col-9 text-right">
+          <div className="col-sm-9 col-9 text-right">
 
-            <button class="hamburger hamburger--spin toggle-menu ml-auto js-toggle-menu" type="button">
-              <span class="hamburger-box">
-                <span class="hamburger-inner"></span>
+            <button className="hamburger hamburger--spin toggle-menu ml-auto js-toggle-menu" type="button">
+              <span className="hamburger-box">
+                <span className="hamburger-inner"></span>
               </span>
             </button>  
 
-            <nav class="templateux-menu js-templateux-menu" role="navigation">
-              <ul class="list-unstyled">
-                <li class="">
+            <nav className="templateux-menu js-templateux-menu" role="navigation">
+              <ul className="list-unstyled">
+                <li className="">
                   <form>
-                    <div class="row">
-                      <button class="col-sm-2 button button--red">
-                        <i class="fas fa-search"></i>
+                    <div className="row">
+                      <button className="mx-2 col-sm-2 button button--red">
+                        <i className="fas fa-search"></i>
                       </button>
-                      <input type="text" class="col-sm-10 form-control" placeholder="Search for tags ..."/>
+                      <input type="text" className="col-sm-8 form-control" placeholder="Search for tags ..."/>
                     </div>
                   </form>
                 </li>
@@ -39,63 +52,39 @@ const App = () => {
       </div>
     </header>
 
-    <section class="templateux-hero">
+    <section className="templateux-hero">
     </section>
     
-    <section class="templateux-portfolio-overlap" id="next">
-      <div class="container-fluid">
+    <section className="templateux-portfolio-overlap" id="next">
+      <div className="container-fluid">
     
-        <div class="row">
-          <div class="col-lg-4 col-md-6" data-aos="fade-up">
-            <a class="project animsition-link" href="work-single.html">
-              <figure>
-                <img src="images/img_3.jpg" alt="Free Template" class="img-fluid"/>  
-              </figure>
-              <div class="project-hover">
-                <div class="project-hover-inner">
-                  <h2>Moon High Res</h2>
-                  <span>View Case Study</span>
-                </div>
-              </div>
-            </a>
-          </div>
+        <div className="row">
 
-          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
-            <a class="project animsition-link" href="work-single.html">
-              <figure>
-                <img src="images/img_4.jpg" alt="Free Template" class="img-fluid"/>  
+          {photos.map((i, j) => (
+            <div key={j} className="col-lg-4 col-md-6" data-aos="fade-up">
+            <a href="/" className="project animsition-link">
+              <figure className="figure">
+                <img style={{width: '800px', height: '400px', objectFit: 'cover'}}
+                src={i.media.m} alt="Free Template" className="figure-img img-fluid rounded img-fluid"/>  
               </figure>
-              <div class="project-hover">
-                <div class="project-hover-inner">
-                  <h2>H20 Water Bottle</h2>
+              <div className="project-hover">
+                <div className="project-hover-inner">
+                  <h2>{i.title}</h2>
                   <span>View Case Study</span>
                 </div>
               </div>
             </a>
           </div>
-
-          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
-            <a class="project animsition-link" href="work-single.html">
-              <figure>
-                <img src="images/img_5.jpg" alt="Free Template" class="img-fluid"/>  
-              </figure>
-              <div class="project-hover">
-                <div class="project-hover-inner">
-                  <h2>Creatsy Mailing Box</h2>
-                  <span>View Case Study</span>
-                </div>
-              </div>
-            </a>
-          </div>
+          ))}
           
         </div>
       </div>
     </section>
 
-    <a class="templateux-section templateux-cta animsition-link mt-5" href="contact.html" data-aos="fade-up">
-      <div class="container-fluid">
-        <div class="cta-inner">
-          <h2><span class="words-1">Start a Project.</span> <span class="words-2">Let's chat we are good people.</span></h2>
+    <a href="/" className="templateux-section templateux-cta animsition-link mt-5" data-aos="fade-up">
+      <div className="container-fluid">
+        <div className="cta-inner">
+          <h2><span className="words-1">Start a Project.</span> <span className="words-2">Let's chat we are good people.</span></h2>
         </div>
       </div>
     </a>

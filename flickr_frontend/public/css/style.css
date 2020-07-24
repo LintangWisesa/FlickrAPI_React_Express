@@ -167,7 +167,7 @@ a:hover, a:active, a:focus { text-decoration: none; outline: none; }
 
 textarea.form-control { height: inherit; }
 
-.button { padding: 5px 5px; display: inline-block; font-size: 13px; letter-spacing: .2em; text-transform: uppercase; color: #fff; border-radius: 30px; border: none; -webkit-transition: .3s all ease; -o-transition: .3s all ease; transition: .3s all ease; }
+.button { padding: 10px 10px; display: inline-block; font-size: 13px; letter-spacing: .2em; text-transform: uppercase; color: #fff; border-radius: 30px; border: none; -webkit-transition: .3s all ease; -o-transition: .3s all ease; transition: .3s all ease; }
 
 .button:hover, .button:active, .button:focus { outline: none; }
 
