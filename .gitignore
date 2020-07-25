@@ -2,6 +2,7 @@
 
 # env
 .env
+z.js
 
 # dependencies
 /node_modules

@@ -1,8 +1,9 @@
 'use strict';
 const express = require('express');
-var cors = require('cors')
+const cors = require('cors')
+const fs = require('fs');
 const dotenv = require('dotenv');
-var Flickr = require('flickr-sdk');
+const Flickr = require('flickr-sdk');
 dotenv.config();
 
 const app = express();
@@ -12,13 +13,9 @@ app.use(cors())
 
 var feeds = new Flickr.Feeds(process.env.FLICKR_API_KEY);
 
-app.get('/tes', (req, res) => {
-    res.send({status: 'GET 200 OK'})
-});
-
-app.post('/tes', (req, res) => {
-    res.send({status: "POST 200 OK"})   
-});
+app.get('/', (req, res)=>{
+    res.sendFile(__dirname + '/templates/home.html')
+})
 
 app.get('/photos', (req, res) => {
     feeds.publicPhotos({    
@@ -27,6 +24,19 @@ app.get('/photos', (req, res) => {
     }).catch((err) => {
         res.send(err);
     });
+})
+
+app.get('/fave', (req, res) => {
+    var data = JSON.parse(fs.readFileSync('./database/db.json'));
+    res.send(data)
+})
+
+app.post('/fave', (req, res) => {
+    var data = JSON.parse(fs.readFileSync('./database/db.json'));
+    data.push(req.body)
+    data = JSON.stringify(data)
+    fs.writeFileSync('./database/db.json', data);
+    res.send(req.body)
 })
 
 app.listen(process.env.HTTP_PORT || 3000, ()=>{
