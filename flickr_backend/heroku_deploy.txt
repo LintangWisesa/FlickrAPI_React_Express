@@ -1,0 +1,3 @@
+- download heroku cli
+- $ heroku login
+- create Procfile => web: node app.js
