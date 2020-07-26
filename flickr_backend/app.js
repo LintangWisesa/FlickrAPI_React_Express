@@ -33,7 +33,7 @@ app.get('/fave', (req, res) => {
 
 app.post('/fave', (req, res) => {
     var data = JSON.parse(fs.readFileSync('./database/db.json'));
-    data.push(req.body)
+    data.unshift(req.body)
     data = JSON.stringify(data)
     fs.writeFileSync('./database/db.json', data);
     res.send(req.body)
