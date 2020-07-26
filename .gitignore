@@ -3,6 +3,7 @@
 # env
 .env
 z.js
+deploy
 
 # dependencies
 /node_modules
