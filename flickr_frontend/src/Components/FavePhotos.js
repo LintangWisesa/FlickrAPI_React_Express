@@ -9,37 +9,33 @@ class FavePhotos extends Component {
         this.state = {photos: [], data: {}, image: ''}
     }
 
-    componentDidMount(){
-        fetch('http://localhost:1234/fave')
-        .then((res) => res.json())
+    delFave = async(index) => {
+        await fetch(`http://localhost:1234/fave/${index}`, {
+            method: 'DELETE',
+            headers: {'Content-Type': 'application/json;charset=utf-8'},
+        })
+        .then((res) => toast.error("❤ Photo removed from your favorites!"))
         .then((res) => {
-          this.setState({photos: res})
+          this.getFave()
         })
     }
 
-    // addfave = async () => {
-    //     await fetch('http://localhost:1234/fave', {
-    //         method: 'POST',
-    //         headers: {'Content-Type': 'application/json;charset=utf-8'},
-    //         body: JSON.stringify({
-    //             title: this.state.data.title,
-    //             author: this.state.data.author,
-    //             description: this.state.data.description,
-    //             published: this.state.data.published,
-    //             tags: this.state.data.tags,
-    //             image: this.state.image,
-    //         })
-    //     })
-    //     .then((res) => res.json())
-    //     .then((res) => {
-    //         toast.success("❤ Photo added to your favorites!")
-    //     })
-    // }
+    getFave = async () => {
+        await fetch(`http://localhost:1234/fave`)
+        .then((res) => res.json())
+        .then((res) => {
+            this.setState({photos: res})
+        })
+    }
+
+    componentDidMount(){
+        this.getFave()
+    }
 
     render(){
         return (
             <section className="templateux-portfolio-overlap" id="next">
-                <ToastContainer position="top-right"/>
+                <ToastContainer position="top-left"/>
                 <div className="container">
 
                     {this.state.photos.length > 0 ? '' : <h2>You don't have any favorite photos yet</h2>}
@@ -56,8 +52,10 @@ class FavePhotos extends Component {
                                 description: i.description,
                                 published: i.published,
                                 tags: i.tags.length > 0 ? i.tags : '',
-                                image: i.image 
-                            } 
+                                image: i.image,
+                                index: j
+                            },
+                            tags: i.tags.length > 0 ? i.tags : '',
                             })}
                     }
                     key={j} className="col-lg-4 col-md-6" data-aos="fade-up">
@@ -133,12 +131,24 @@ class FavePhotos extends Component {
                             <hr/>
                             <ul style={{listStyle: 'none'}}>
                                 <li><i className="mr-2 fas fa-user"></i>{this.state.data.author}</li>
-                                <li><i className="mr-2 fas fa-tag"></i>{this.state.data.tags ? this.state.data.tags : 'No tags'}</li>
+                                <li><i className="mr-2 fas fa-tag"></i>{
+                                    this.state.tags 
+                                    ? 
+                                    this.state.tags.map((i, j) => 
+                                        (
+                                            <span key={j} className="mr-1 badge badge-secondary">
+                                            {i}
+                                            </span>
+                                        )
+                                    ) 
+                                    : 
+                                    'No tags'
+                                }</li>
                                 <li><i className="mr-2 far fa-clock"></i>{this.state.data.published}</li>
                             </ul>
                         </div>
                         <div className="modal-footer">
-                            <button
+                            <button data-dismiss="modal" onClick={()=>{this.delFave(this.state.data.index)}}
                             type="button" className="btn btn-dark">
                                 <i className="ml-1 fas fa-trash"></i> Delete
                             </button>

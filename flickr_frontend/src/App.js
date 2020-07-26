@@ -44,9 +44,9 @@ class App extends Component {
 
               <nav className="templateux-menu js-templateux-menu" role="navigation">
                 <ul className="list-unstyled">
-                  <li><Link to="/">Home</Link></li>
-                  <li><Link to="/fave">My Faves</Link></li>
-                  <li className="">
+                  <li><Link to="/"><i className="fas fa-home"></i> Home</Link></li>
+                  <li><Link to="/fave"><i className="fas fa-heart"></i> My Faves</Link></li>
+                  {/* <li className="">
                     <form className='ml-3'>
                       <div className="row">
                         <input type="text" className="col-sm-8 form-control" 
@@ -56,7 +56,7 @@ class App extends Component {
                         </button>
                       </div>
                     </form>
-                  </li>
+                  </li> */}
                 </ul>
               </nav>  
             </div>
@@ -79,7 +79,14 @@ class App extends Component {
       <a href="/" className="templateux-section templateux-cta animsition-link mt-5" data-aos="fade-up">
         <div className="container-fluid">
           <div className="cta-inner">
-            <h2><span className="words-1">Start a Project.</span> <span className="words-2">Let's chat we are good people.</span></h2>
+            <h2>
+              <span className="words-1">
+                <i className="mr-2 fas fa-quote-right"></i> I don’t trust words.
+              </span> 
+              <span className="words-2">
+                I trust pictures.<i className="mx-2 fas fa-quote-left"></i>
+                <small><b><i> Gilles Peress</i></b></small></span>
+            </h2>
           </div>
         </div>
       </a>

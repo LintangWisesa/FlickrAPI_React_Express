@@ -24,14 +24,14 @@ class PublicPhotos extends Component {
         })
         .then((res) => res.json())
         .then((res) => {
-            toast.success("❤ Photo added to your favorites!")
+            toast.error("❤ Photo added to your favorites!")
         })
     }
 
     render(){
         return (
             <section className="templateux-portfolio-overlap" id="next">
-                <ToastContainer position="top-right"/>
+                <ToastContainer position="top-left"/>
                 <div className="container">
             
                 <div className="row">
@@ -47,6 +47,7 @@ class PublicPhotos extends Component {
                                 published: i.published.split('T')[0],
                                 tags: i.tags.split('').length > 0 ? i.tags.split(' ') : '' 
                             }, 
+                            tags: i.tags.split('').length > 0 ? i.tags.split(' ') : '',
                             image: i.media.m})}
                     } 
                     key={j} className="col-lg-4 col-md-6" data-aos="fade-up">
@@ -122,8 +123,22 @@ class PublicPhotos extends Component {
                             <hr/>
                             <ul style={{listStyle: 'none'}}>
                                 <li><i className="mr-2 fas fa-user"></i>{this.state.data.author}</li>
-                                <li><i className="mr-2 fas fa-tag"></i>{this.state.data.tags ? this.state.data.tags : 'No tags'}</li>
-                                <li><i className="mr-2 far fa-clock"></i>{this.state.data.published}</li>
+                                <li><i className="mr-2 fas fa-tag"></i>{
+                                    this.state.tags 
+                                    ? 
+                                    this.state.tags.map((i, j) => 
+                                        (
+                                            <span key={j} className="mr-1 badge badge-secondary">
+                                            {i}
+                                            </span>
+                                        )
+                                    ) 
+                                    : 
+                                    'No tags'
+                                }</li>
+                                <li><i className="mr-2 far fa-clock"></i>
+                                    Published on {this.state.data.published}
+                                </li>
                             </ul>
                         </div>
                         <div className="modal-footer">
